@@ -1,0 +1,95 @@
+\documentclass[12pt]{jreport}
+\usepackage[dvipdfmx]{graphicx}
+
+\usepackage[bachelor]{AIcover}	% 卒論の場合
+
+\usepackage{AIthesis}
+\usepackage{geometry}
+
+\input personal
+
+\begin{document}
+\makeCoverPageIII
+\newpage
+
+\newgeometry{margin=0mm}
+\begin{figure}
+  \centering
+  \includegraphics[width=21.0cm]{abst.pdf}
+\end{figure}
+
+\restoregeometry
+
+\pagestyle{plain}
+% 目次
+\pagenumbering{roman}	%目次のページ番号(ローマ字)
+\tableofcontents 		%目次作成
+\newpage
+\pagenumbering{arabic} 	%本編ページ番号
+
+% Chapter1 : はじめに
+\chapter{はじめに}
+ここに「はじめに」を書く．
+
+\section{論文の書式}
+論文は，A4 版の PDF データで提出する．
+LaTeX で作成する場合は，このサンプル PDF を作成するのに用いた TeX ファイルを編集し作成するとよい．
+LaTeXの参考書には\cite{rakuraku,bibunsyo}がある．
+この PDF ファイルの構成（表紙，概要，論文本体）と見た目に準じたものであれば
+Word 等を用いて作成してもよい．
+論文作成にあたっては指導教員の指示を仰ぐこと．
+
+\subsection{使用言語}
+論文を記述するのに使用する言語は，日本語または英語とする．
+%
+\subsection{ページのレイアウト}
+製本その他読みやすさ等を考慮して，マージンは大きめにとること．
+以下は最低値の目安である．
+
+\vspace*{3mm}
+\hspace*{10mm}
+\begin{tabular}{ll}
+上マージン & 25mm 程度 \\
+下マージン & 30mm 程度 (ページ番号はマージン内) \\
+左マージン & 25mm 程度 \\ %(製本の都合上 30mm 以上は必要) \\
+右マージン & 25mm 程度 \\
+\end{tabular}
+
+\subsection{文字の大きさ}
+読みやすさ等を考慮して，極端に小さい文字や大きな文字はさけ，行間は十分にあけること． 
+文字サイズ 11-12pt, 1ページ 30 行で日本語の場合は 1 行あたり 40 文字程度が目安となる． 
+
+
+
+\chapter*{謝辞}
+ここに謝辞を書く．お世話になった人，物，サービス，組織に感謝を述べる．
+
+
+\renewcommand{\bibname}{参考文献}
+%%% 本格的に文献管理をするなら BibTex を使いましょう
+
+\begin{thebibliography}{99}
+
+\bibitem{rakuraku}
+野寺隆志，
+\newblock 
+楽々LATEX (第2版)，
+\newblock 
+共立出版，1994．
+
+\bibitem{bibunsyo}
+奥村晴彦，黒木裕介，
+\newblock 
+\LaTeXe 美文書作成入門 第7版，
+\newblock
+技術評論社，2017．
+
+\end{thebibliography}
+
+
+\chapter*{付録}
+付録があればここに書く．
+
+
+\end{document}
+
