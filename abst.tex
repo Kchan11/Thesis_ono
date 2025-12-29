@@ -1,0 +1,62 @@
+
+\documentclass{AIabst} %卒論はこちら
+\usepackage{amsmath}
+%\documentclass[master]{AIabst} %修論はこちら
+% 論文概要
+\input personal
+\begin{document}
+\makeAbstHeader
+%
+%
+%
+\section{はじめに}
+昨今では様々な暗号化方式が存在するが，その中でも格子基盤暗号に分類されるNTRU方式は，計算が高速かつ量子攻撃にも耐性があるという点で優れている．また，FHEとは暗号化したデータを復号することなく直接演算を行うことができる
+技術であるが，異なる鍵で暗号化した複数のデータに対して演算を行うマルチキーFHE(MKFHE)を利用できるライブラリは，Go言語で実装されているtfhe-go等，ごく限られている．\\
+本研究では，C++で既に実装されているopenFHEというライブラリを利用し，NTRU方式に基づくMKFHEシステムを構築し，さらにこれを応用しワンタイムパッドという暗号方式を実装する．
+
+\section{従来の暗号化方式とMKFHEの比較}
+これまで広く利用されてきた，RSAに代表されるような基本的な公開鍵暗号方式は，データを暗号化したまま加算や乗算を行っても正しい平文の結果が得られるという準同型性を有していることが多い．
+このような点を改善したものが，マルチキーFHEである．
+
+
+
+\section{注意する点}
+本スタイルファイルで注意する点は以下の通りである．
+\begin{enumerate}
+\item
+基本的に通常の LaTeX と同じように利用できる．
+ただし，パッケージは最低限のものしか入れていないので，
+必要に応じて自身で{\tt abst.tex\/}へ追加する．
+\item
+見出しは{\tt section\/}と{\tt subsection\/}
+しか使えない．
+\item
+{\tt baselineskip\/}は変更しないこと．
+\item
+参考文献を加える方法は，通常通りである．
+例えば，
+LaTeX の参考書には\cite{rakuraku,bibunsyo}がある．
+\end{enumerate}
+
+{\small
+\baselineskip 12pt
+\begin{thebibliography}{1}
+
+\bibitem{rakuraku}
+野寺隆志，
+\newblock 
+楽々LATEX (第2版)，
+\newblock 
+共立出版，1994．
+
+\bibitem{bibunsyo}
+奥村晴彦，黒木裕介，
+\newblock 
+\LaTeXe 美文書作成入門 第7版，
+\newblock
+技術評論社，2017．
+
+\end{thebibliography}
+}
+\end{document}
+
