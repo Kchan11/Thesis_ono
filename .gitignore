@@ -3,7 +3,6 @@
 *.dvi
 *.fls
 *.log
-*.pdf
 *.synctex.gz
 *.toc
 *.fdb_latexmk
