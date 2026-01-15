@@ -1,6 +1,7 @@
 
 \documentclass{AIabst} %卒論はこちら
 \usepackage{amsmath}
+\usepackage{latexsym}
 %\documentclass[master]{AIabst} %修論はこちら
 % 論文概要
 \input personal
@@ -38,10 +39,20 @@
 \begin{equation*}
     c_{carry}=(A+C_in)*(B*C_in)+C_{in}
 \end{equation*}
-のように，加算と乗算を利用した式に変形することができる．
+のように，加算と乗算を利用した式に変形することができる．以上のことから，加算器の実装にはMKFHEの準同型性を利用することができる．
 
 
-\section{注意する点}
+
+\section{実験結果}
+まず，1ビットのデータ同士の加算及び乗算を行う．具体的には，
+\item $a\oplus b\oplus c$
+\item $a\cdot b\cdot c$
+\item $(a\oplus b)\cdot c$
+の$a$，$b$，$c$に0か1のランダムなビットを割り当て，全ての式で正しい結果が得られた時に成功回数を1カウントアップする．
+
+
+
+
 
 \begin{enumerate}
 \item
