@@ -1,2 +1,11 @@
-qDx10VnMwchOJ-Y_8_BjuQ
-evVf5qMOCT73enYAv7E5yQ
+0.4
+Total Runs: 10000
+Success:    9862
+Failure:    138
+Elapsed Time: 183.442 seconds
+
+0.35
+Total Runs: 10000
+Success:    9986
+Failure:    14
+Elapsed Time: 2139.989 seconds
