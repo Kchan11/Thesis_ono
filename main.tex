@@ -1,0 +1,119 @@
+\documentclass[12pt]{jreport}
+\usepackage[dvipdfmx]{graphicx}
+
+\usepackage[bachelor]{AIcover}	% 卒論の場合
+
+\usepackage{AIthesis}
+\usepackage{geometry}
+
+\input personal
+
+\begin{document}
+\makeCoverPageIII
+\newpage
+
+\newgeometry{margin=0mm}
+\begin{figure}
+  \centering
+  \includegraphics[width=21.0cm]{abst.pdf}
+\end{figure}
+
+\restoregeometry
+
+\pagestyle{plain}
+% 目次
+\pagenumbering{roman}	%目次のページ番号(ローマ字)
+\tableofcontents 		%目次作成
+\newpage
+\pagenumbering{arabic} 	%本編ページ番号
+
+% Chapter1 : はじめに
+\chapter{はじめに}
+ここに「はじめに」を書く．
+
+\section{論文の書式}
+論文は，A4 版の PDF データで提出する．
+LaTeX で作成する場合は，このサンプル PDF を作成するのに用いた TeX ファイルを編集し作成するとよい．
+LaTeXの参考書には\cite{rakuraku,bibunsyo}がある．
+この PDF ファイルの構成（表紙，概要，論文本体）と見た目に準じたものであれば
+Word 等を用いて作成してもよい．
+論文作成にあたっては指導教員の指示を仰ぐこと．
+
+\subsection{使用言語}
+論文を記述するのに使用する言語は，日本語または英語とする．
+%
+\subsection{ページのレイアウト}
+製本その他読みやすさ等を考慮して，マージンは大きめにとること．
+以下は最低値の目安である．
+
+\vspace*{3mm}
+\hspace*{10mm}
+\begin{tabular}{ll}
+上マージン & 25mm 程度 \\
+下マージン & 30mm 程度 (ページ番号はマージン内) \\
+左マージン & 25mm 程度 \\ %(製本の都合上 30mm 以上は必要) \\
+右マージン & 25mm 程度 \\
+\end{tabular}
+
+\subsection{文字の大きさ}
+読みやすさ等を考慮して，極端に小さい文字や大きな文字はさけ，行間は十分にあけること． 
+文字サイズ 11-12pt, 1ページ 30 行で日本語の場合は 1 行あたり 40 文字程度が目安となる． 
+
+
+
+\chapter*{謝辞}
+ここに謝辞を書く．お世話になった人，物，サービス，組織に感謝を述べる．
+
+
+\renewcommand{\bibname}{参考文献}
+%%% 本格的に文献管理をするなら BibTex を使いましょう
+
+\begin{thebibliography}{99}
+
+\bibitem{rakuraku}
+野寺隆志，
+\newblock 
+楽々LATEX (第2版)，
+\newblock 
+共立出版，1994．
+
+\bibitem{bibunsyo}
+奥村晴彦，黒木裕介，
+\newblock 
+\LaTeXe 美文書作成入門 第7版，
+\newblock
+技術評論社，2017．
+
+\end{thebibliography}
+
+
+\chapter*{付録}
+付録があればここに書く．
+
+
+\end{document}
+
+
+
+シンプルなNTRUの計算手順\cite{MKFHEpdf1}は，以下の通りである．
+\begin{enumerate}
+    \item 多項式の次数$n$と法$q$を決める．$n$は2のべき乗であり，$q$は素数である．
+    \item 係数の小さい多項式$f'$と$g$を生成し，$f=2f'+1$と定義する．
+    \item 秘密鍵を$sk=f$，公開鍵を$pk=[2gf^{-1}]_q$と定義する．なお，下付き文字の$q$は係数を$q$で割った余りとするという意味である．
+    \item 暗号化したいデータを$m\in{0,1}$の1ビットで表す．また，係数の小さい多項式$s$，$e$を生成する．暗号文は，
+    \begin{equation*}
+        c=[hs+2e+m]_q
+    \end{equation*}
+    と定義される．
+    \item $\mu=[fc]_q$とし，$\mu$を2で割った剰余が復号された平文である．
+\end{enumerate}
+ここで，この手順をマルチキーに拡張することを考える．ユーザ1の公開鍵$h_1=[2g_1f_1^{-1}]$で暗号化した暗号文を$c_1=[h_1s_1+2e_1+m_1]_q$，ユーザ2の公開鍵$h_2=[2g_2f_2^{-1}]$で暗号化した暗号文を$c_2=[h_2s_2+2e_2+m_2]_q$とし，秘密鍵の積を
+$f_{com}=f_1f_2$と定義する．すると，暗号文の和$c_{add}=[c_1+c_2]_q$を復号した結果は，
+\begin{equation*}
+    [f_1f_2(c_1+c_2)]_q=[2e_{add}+f_1f_2(m_1+m_2)]_q
+\end{equation*}
+と変形できる．ここで，右辺に対し先程のNTRUの復号手順の通り2の剰余を取ると，第一項目は$2e_{add}\equiv0(mod 2)$であり，第二項目に関しては秘密鍵$f=2f'+1$と定義していたから，当然$f_1\equiv1(mod 2)$，$f_2\equiv1(mod 2)$である．したがって，$f_1f_2\equiv1$であるから，項全体としては$m_1+m_2$のみが残る．
+ゆえに，$c_{add}=[c_1+c_2]_q$が成り立つ．同様の変形を経て，積の準同型性$c_{mult}=[c_1c_2]_q$も証明できる．\\
+openFHEには，NativePolyという多項式を表現できるクラスが既に実装されている．これを用いることで，これまでに示してきたMKFHEの手順をC++コードに実装した．
+
+
